@@ -62,33 +62,18 @@ class Citations {
         }
     ]
 
-    // Génération d'une citation aléatoire
-    randomQuote() {
-        let randomTheme = Math.floor(Math.random() * this.theme.length);
-        let randomSujet = Math.floor(Math.random() * this.theme[randomTheme].sujet.length);
-        let randomVerbe = Math.floor(Math.random() * this.theme[randomTheme].verbe.length);
-        let randomComplement = Math.floor(Math.random() * this.theme[randomTheme].complement.length);
-        return this.theme[randomTheme].sujet[randomSujet] + " " + this.theme[randomTheme].verbe[randomVerbe] + " " + this.theme[randomTheme].complement[randomComplement];
-    }
-
-    // Génération d'une citation aléatoire du thème PSG
-    randomQuotePSG() {
-        let randomSujet = Math.floor(Math.random() * this.theme[0].sujet.length);
-        let randomVerbe = Math.floor(Math.random() * this.theme[0].verbe.length);
-        let randomComplement = Math.floor(Math.random() * this.theme[0].complement.length);
-        return this.theme[0].sujet[randomSujet] + " " + this.theme[0].verbe[randomVerbe] + " " + this.theme[0].complement[randomComplement];
-    }
-
-    // Génération d'une citation aléatoire du thème Stargate
-    randomQuoteStargate() {
-        let randomSujet = Math.floor(Math.random() * this.theme[1].sujet.length);
-        let randomVerbe = Math.floor(Math.random() * this.theme[1].verbe.length);
-        let randomComplement = Math.floor(Math.random() * this.theme[1].complement.length);
-        return this.theme[1].sujet[randomSujet] + " " + this.theme[1].verbe[randomVerbe] + " " + this.theme[1].complement[randomComplement];
+    // Génération d'une citation aléatoire du thème choisi par l'utilisateur
+    randomQuote(choice) {
+        let randomSujet = Math.floor(Math.random() * this.theme[choice].sujet.length);
+        let randomVerbe = Math.floor(Math.random() * this.theme[choice].verbe.length);
+        let randomComplement = Math.floor(Math.random() * this.theme[choice].complement.length);
+        return this.theme[choice].sujet[randomSujet] + " " + this.theme[choice].verbe[randomVerbe] + " " + this.theme[choice].complement[randomComplement];
     }
 }
 
 const citations = new Citations();
+console.log(citations.randomQuote(0));
+console.log(citations.randomQuote(1));
 
 /************************************************************/
 /*************** COMMUNICATION AVEC LE DOM ******************/
@@ -107,10 +92,10 @@ BtnGo.addEventListener("click", () => {
         let paragraphe = document.createElement("p");
 
         if(theme == "PSG") {
-            paragraphe.textContent = citations.randomQuotePSG();
+            paragraphe.textContent = citations.randomQuote(0);
         }
         else if(theme == "Stargate") {
-            paragraphe.textContent = citations.randomQuoteStargate();
+            paragraphe.textContent = citations.randomQuote(1);
         }
 
         quotesContainer.appendChild(paragraphe);
